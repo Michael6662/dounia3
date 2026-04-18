@@ -165,18 +165,18 @@ export default function LieuDetail() {
           {avgRating > 0 && <span className="place-meta-item">⭐ {avgRating}/5</span>}
         </div>
 
-        <div style={{display:'flex',gap:'10px',marginBottom:'32px',flexWrap:'wrap'}}>
+        <div style={{display:'flex',gap:'8px',marginBottom:'32px',flexWrap:'wrap'}}>
           <button onClick={handleFavoris} className={`btn ${isFavoris ? 'btn-primary' : 'btn-outline'} btn-sm`} style={{display:'flex',alignItems:'center',gap:'6px'}}>
-            <Heart size={14} fill={isFavoris ? 'currentColor' : 'none'}/> {isFavoris ? 'Dans les favoris' : 'Favoris'}
+            <Heart size={14} fill={isFavoris ? 'currentColor' : 'none'}/> {isFavoris ? 'Favoris ✓' : 'Favoris'}
           </button>
           <button onClick={handleShare} className="btn btn-outline btn-sm" style={{display:'flex',alignItems:'center',gap:'6px'}}>
             <Share2 size={14}/> Partager
           </button>
-          <button onClick={shareWhatsApp} className="btn btn-outline btn-sm" style={{display:'flex',alignItems:'center',gap:'6px',color:'#25D366',borderColor:'rgba(37,211,102,0.3)'}}>
-            📱 WhatsApp
+          <button onClick={shareWhatsApp} className="btn btn-outline btn-sm" style={{color:'#25D366',borderColor:'rgba(37,211,102,0.3)'}}>
+            WhatsApp
           </button>
-          <button onClick={shareFacebook} className="btn btn-outline btn-sm" style={{display:'flex',alignItems:'center',gap:'6px',color:'#1877F2',borderColor:'rgba(24,119,242,0.3)'}}>
-            📘 Facebook
+          <button onClick={shareFacebook} className="btn btn-outline btn-sm" style={{color:'#1877F2',borderColor:'rgba(24,119,242,0.3)'}}>
+            Facebook
           </button>
         </div>
 

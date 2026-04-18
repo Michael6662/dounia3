@@ -32,12 +32,13 @@ export default function Navbar({ onAuthClick }) {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar" style={{position:'fixed',top:0,left:0,right:0,zIndex:1000}}>
         <Link to="/" className="navbar-brand" onClick={closeMenu}>
           <div className="navbar-logo">D</div>
           <span className="navbar-name">DOUNIA</span>
         </Link>
 
+        {/* Desktop nav */}
         <div className="navbar-nav desktop-nav">
           <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Accueil</Link>
           <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} style={{display:'flex',alignItems:'center',gap:'4px'}}>
@@ -68,29 +69,109 @@ export default function Navbar({ onAuthClick }) {
           )}
         </div>
 
-        <button className="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={24}/> : <Menu size={24}/>}
+        {/* Hamburger button */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{
+            display:'none',background:'none',border:'none',
+            color:'var(--white)',cursor:'pointer',padding:'8px',
+            zIndex:1001,position:'relative'
+          }}
+          className="hamburger-btn"
+        >
+          {menuOpen ? <X size={28}/> : <Menu size={28}/>}
         </button>
       </nav>
 
+      {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="mobile-menu">
-          <Link to="/" className="mobile-nav-link" onClick={closeMenu}>🏠 Accueil</Link>
-          <Link to="/about" className="mobile-nav-link" onClick={closeMenu}>ℹ️ À propos</Link>
-          <button onClick={handleRandom} className="mobile-nav-link btn-reset">🎲 Lieu aléatoire</button>
+        <div
+          style={{
+            position:'fixed',top:0,left:0,right:0,bottom:0,
+            background:'rgba(13,27,62,0.99)',
+            zIndex:999,
+            display:'flex',flexDirection:'column',
+            padding:'80px 24px 24px',
+            gap:'4px',
+            overflowY:'auto'
+          }}
+        >
+          {/* Close button top right */}
+          <button
+            onClick={closeMenu}
+            style={{position:'absolute',top:'16px',right:'16px',background:'none',border:'none',color:'var(--white)',cursor:'pointer',padding:'8px'}}
+          >
+            <X size={28}/>
+          </button>
+
+          {[
+            { to:'/', label:'🏠 Accueil' },
+            { to:'/about', label:'ℹ️ À propos' },
+          ].map(item => (
+            <Link key={item.to} to={item.to} onClick={closeMenu} style={{
+              display:'block',padding:'16px 20px',borderRadius:'12px',
+              color:'var(--white)',textDecoration:'none',fontSize:'18px',
+              fontFamily:'var(--font-sub)',fontWeight:'500',
+              background:'rgba(255,255,255,0.05)',marginBottom:'4px'
+            }}>
+              {item.label}
+            </Link>
+          ))}
+
+          <button onClick={handleRandom} style={{
+            display:'block',padding:'16px 20px',borderRadius:'12px',
+            color:'var(--white)',fontSize:'18px',textAlign:'left',width:'100%',
+            fontFamily:'var(--font-sub)',fontWeight:'500',
+            background:'rgba(255,255,255,0.05)',marginBottom:'4px',
+            border:'none',cursor:'pointer'
+          }}>
+            🎲 Lieu aléatoire
+          </button>
+
           <div style={{height:'1px',background:'var(--border)',margin:'8px 0'}}/>
+
           {user ? (
             <>
-              <Link to="/dashboard" className="mobile-nav-link" onClick={closeMenu}>📊 Mon espace</Link>
-              {isAdmin && <Link to="/admin" className="mobile-nav-link" onClick={closeMenu} style={{color:'var(--gold)'}}>⚙️ Admin</Link>}
-              <button onClick={handleSignOut} className="mobile-nav-link btn-reset" style={{color:'#f87171'}}>
+              <Link to="/dashboard" onClick={closeMenu} style={{
+                display:'block',padding:'16px 20px',borderRadius:'12px',
+                color:'var(--white)',textDecoration:'none',fontSize:'18px',
+                fontFamily:'var(--font-sub)',fontWeight:'500',
+                background:'rgba(255,255,255,0.05)',marginBottom:'4px'
+              }}>📊 Mon espace</Link>
+
+              {isAdmin && (
+                <Link to="/admin" onClick={closeMenu} style={{
+                  display:'block',padding:'16px 20px',borderRadius:'12px',
+                  color:'var(--gold)',textDecoration:'none',fontSize:'18px',
+                  fontFamily:'var(--font-sub)',fontWeight:'500',
+                  background:'rgba(200,151,42,0.1)',marginBottom:'4px'
+                }}>⚙️ Admin</Link>
+              )}
+
+              <button onClick={handleSignOut} style={{
+                display:'block',padding:'16px 20px',borderRadius:'12px',
+                color:'#f87171',fontSize:'18px',textAlign:'left',width:'100%',
+                fontFamily:'var(--font-sub)',fontWeight:'500',
+                background:'rgba(220,38,38,0.1)',marginBottom:'4px',
+                border:'none',cursor:'pointer'
+              }}>
                 🚪 Déconnexion — {profile?.nom?.split(' ')[0]}
               </button>
             </>
           ) : (
             <>
-              <button onClick={() => { onAuthClick('login'); closeMenu() }} className="mobile-nav-link btn-reset">🔑 Connexion</button>
-              <button onClick={() => { onAuthClick('signup'); closeMenu() }} className="btn btn-primary" style={{marginTop:'8px',justifyContent:'center'}}>
+              <button onClick={() => { onAuthClick('login'); closeMenu() }} style={{
+                display:'block',padding:'16px 20px',borderRadius:'12px',
+                color:'var(--white)',fontSize:'18px',textAlign:'left',width:'100%',
+                fontFamily:'var(--font-sub)',fontWeight:'500',
+                background:'rgba(255,255,255,0.05)',marginBottom:'4px',
+                border:'none',cursor:'pointer'
+              }}>🔑 Connexion</button>
+
+              <button onClick={() => { onAuthClick('signup'); closeMenu() }} className="btn btn-primary" style={{
+                marginTop:'12px',justifyContent:'center',fontSize:'16px',
+                padding:'16px',width:'100%'
+              }}>
                 ✦ Créer un compte
               </button>
             </>

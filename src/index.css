@@ -368,20 +368,87 @@ body {
 .badge-certified { background: rgba(200,151,42,0.15); color: var(--gold); border: 1px solid rgba(200,151,42,0.3); }
 .badge-expert { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
 
-/* Responsive */
+
+/* ===== RESPONSIVE MOBILE ===== */
+
+/* Hamburger button */
+.hamburger-btn { display: none !important; }
+
 @media (max-width: 768px) {
-  .navbar-nav .nav-link { display: none; }
+  /* Navbar */
+  .desktop-nav { display: none !important; }
+  .hamburger-btn { display: flex !important; align-items: center; }
+
+  /* Hero */
+  .hero { min-height: 100svh; }
+  .hero-title { font-size: 26px !important; line-height: 1.2; }
+  .hero-subtitle { font-size: 15px !important; }
+  .hero-hint { font-size: 12px; }
+  .hero-bottom { padding: 24px 16px 0; }
+  .hero-actions { flex-direction: column; width: 100%; align-items: stretch; }
+  .hero-actions .btn { justify-content: center; padding: 14px !important; font-size: 12px !important; }
+
+  /* Stats bar */
+  .stats-bar { gap: 12px; padding: 12px 16px; justify-content: flex-start; flex-wrap: wrap; }
+  .stat-item { font-size: 12px; }
+
+  /* Sections */
+  .section { padding: 48px 0; }
+  .section-title { font-size: 20px !important; }
+  .container { padding: 0 16px; }
+
+  /* Places grid */
+  .places-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .place-card-title { font-size: 14px; }
+  .place-card-body { padding: 14px; }
+  .place-card-img { height: 130px; }
+
+  /* Featured card */
   .featured-card { grid-template-columns: 1fr; }
-  .hero-title { font-size: 28px; }
-  .places-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats-bar { gap: 24px; }
-  .dashboard-header { padding: 100px 16px 30px; }
-}
-@media (max-width: 480px) {
-  .places-grid { grid-template-columns: 1fr; }
+  .featured-card-body { padding: 20px; }
+  .featured-title { font-size: 20px !important; }
+
+  /* Filters */
+  .filters { gap: 6px; }
+  .filter-btn { padding: 6px 12px; font-size: 12px; }
+
+  /* Search */
+  .search-input { font-size: 14px; }
+
+  /* Dashboard */
+  .dashboard-header { padding: 88px 16px 24px; }
+  .dashboard-title { font-size: 24px !important; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-value { font-size: 22px !important; }
+
+  /* Place detail */
+  .place-detail-hero { height: 280px; }
+  .place-detail-title { font-size: 26px !important; }
+  .place-detail-content { padding: 24px 0 60px; }
+  .place-detail-meta { gap: 12px; }
+
+  /* Modal */
+  .modal { padding: 24px 20px; margin: 0 8px; }
+  .modal-title { font-size: 20px; }
+  .role-selector { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* Admin table */
+  .admin-table { font-size: 12px; }
+  .admin-table th, .admin-table td { padding: 8px; }
+
+  /* Footer */
+  footer .container > div:first-child { grid-template-columns: 1fr !important; gap: 24px !important; }
+  footer { font-size: 13px; }
 }
 
-/* Page transition */
+@media (max-width: 480px) {
+  .places-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 24px !important; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 18px !important; }
+}
+
+/* ===== PAGE TRANSITION ===== */
 .page { animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -398,32 +465,6 @@ body {
 
 /* Divider */
 .divider { height: 1px; background: var(--border); margin: 32px 0; }
-
-/* Hamburger & Mobile menu */
-.hamburger-btn {
-  display: none;
-  background: none; border: none;
-  color: var(--white); cursor: pointer; padding: 8px;
-}
-@media (max-width: 768px) {
-  .desktop-nav { display: none !important; }
-  .hamburger-btn { display: flex !important; align-items: center; }
-}
-.mobile-menu {
-  position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
-  background: rgba(13,27,62,0.98); backdrop-filter: blur(20px);
-  z-index: 99; display: flex; flex-direction: column;
-  padding: 24px; gap: 4px; overflow-y: auto;
-  animation: fadeIn 0.2s ease;
-}
-.mobile-nav-link {
-  display: block; padding: 14px 16px; border-radius: 10px;
-  color: var(--white); text-decoration: none; font-size: 16px;
-  font-family: var(--font-sub); font-weight: 500;
-  transition: background 0.2s; width: 100%;
-}
-.mobile-nav-link:hover { background: rgba(255,255,255,0.08); }
-.btn-reset { background: none; border: none; cursor: pointer; }
 
 /* Shimmer animation for skeleton */
 @keyframes shimmer {
