@@ -126,28 +126,26 @@ export default function LieuDetail() {
         {lieu.embed_3d ? (
           <iframe src={lieu.embed_3d} title={lieu.nom} allowFullScreen allow="autoplay; fullscreen; xr-spatial-tracking" />
         ) : (
-          <div style={{width:'100%',height:'100%',background:'rgba(26,77,143,0.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'80px',marginTop:'64px'}}>🌍</div>
+          <div style={{width:'100%',height:'100%',background:'rgba(26,77,143,0.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'80px'}}>🌍</div>
         )}
         <div className="place-detail-overlay"/>
 
-        {/* Hints bar */}
+        {/* Hints bar — pointer-events none so it doesn't block 3D */}
         <div style={{
-          position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)',
-          background: 'rgba(13,27,62,0.85)', backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(0,229,255,0.2)', borderRadius: '30px',
-          padding: '10px 24px', display: 'flex', alignItems: 'center', gap: '20px',
-          whiteSpace: 'nowrap', zIndex: 10,
+          position:'absolute',bottom:'16px',left:'50%',transform:'translateX(-50%)',
+          background:'rgba(13,27,62,0.85)',backdropFilter:'blur(10px)',
+          border:'1px solid rgba(0,229,255,0.2)',borderRadius:'30px',
+          padding:'8px 16px',display:'flex',alignItems:'center',gap:'12px',
+          whiteSpace:'nowrap',zIndex:10,
           opacity: showHints ? 1 : 0,
-          transition: 'opacity 1s ease',
-          pointerEvents: 'none',
-          fontSize: '13px', color: 'rgba(255,255,255,0.8)',
-          fontFamily: 'var(--font-sub)',
+          transition:'opacity 1s ease',
+          pointerEvents:'none',
+          fontSize:'12px',color:'rgba(255,255,255,0.8)',
+          fontFamily:'var(--font-sub)',
         }}>
           <span>🖱️ Glisser pour tourner</span>
           <span style={{color:'rgba(0,229,255,0.4)'}}>•</span>
           <span>📜 Scroll pour zoomer</span>
-          <span style={{color:'rgba(0,229,255,0.4)'}}>•</span>
-          <span>👆 Double-clic pour centrer</span>
         </div>
       </div>
 

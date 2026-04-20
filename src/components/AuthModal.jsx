@@ -39,7 +39,7 @@ export default function AuthModal({ mode, onClose, onSwitch }) {
     setLoading(true)
     setError('')
     const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
-      redirectTo: window.location.origin + '/reset-password'
+      redirectTo: 'https://dounia3.vercel.app/reset-password'
     })
     if (error) {
       setError(error.message)
