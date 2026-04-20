@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
+import ResetPassword from './pages/ResetPassword'
 
 function Onboarding({ onClose }) {
   const [step, setStep] = useState(0)
@@ -97,6 +98,7 @@ export default function App() {
         <Route path="/" element={<Home onAuthClick={setAuthModal} />} />
         <Route path="/lieu/:id" element={<LieuDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
         <Route path="/admin" element={<AdminGuard><Admin /></AdminGuard>} />
         <Route path="*" element={<NotFound />} />
