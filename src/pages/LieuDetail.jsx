@@ -43,23 +43,18 @@ export default function LieuDetail() {
     const lastView = localStorage.getItem(viewKey)
     const now = Date.now()
     const twentyFourHours = 24 * 60 * 60 * 1000
-
     const shouldCount = !lastView || (now - parseInt(lastView)) > twentyFourHours
 
     if (shouldCount) {
-      // Incrémenter le compteur
-      const { error: updateError } = await supabase
-        .from('lieux')
-        .update({ nb_visites: (data.nb_visites || 0) + 1 })
-        .eq('id', id)
+      // Appel RPC sécurisé — pas de bypass RLS
+      const { error: rpcError } = await supabase.rpc('increment_visit', { lieu_id: id })
 
-      if (!updateError) {
+      if (!rpcError) {
         localStorage.setItem(viewKey, now.toString())
-        // Mettre à jour l'affichage local
-        setLieu(prev => prev ? { ...prev, nb_visites: (data.nb_visites || 0) + 1 } : prev)
+        setLieu(prev => prev ? { ...prev, nb_visites: (prev.nb_visites || 0) + 1 } : prev)
       }
 
-      // Log visite en base si connecté
+      // Log visite si connecté
       if (user) {
         await supabase.from('visites').insert({ user_id: user.id, lieu_id: id })
       }
