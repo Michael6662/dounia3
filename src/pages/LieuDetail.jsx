@@ -38,11 +38,32 @@ export default function LieuDetail() {
     setLoading(false)
     document.title = `${data.nom} — Dounia`
 
-    // Increment visit count
-    await supabase.from('lieux').update({ nb_visites: (data.nb_visites || 0) + 1 }).eq('id', id)
+    // Système de vues avec anti-doublon 24h
+    const viewKey = `dounia_view_${id}`
+    const lastView = localStorage.getItem(viewKey)
+    const now = Date.now()
+    const twentyFourHours = 24 * 60 * 60 * 1000
 
-    // Log visit
-    if (user) await supabase.from('visites').insert({ user_id: user.id, lieu_id: id })
+    const shouldCount = !lastView || (now - parseInt(lastView)) > twentyFourHours
+
+    if (shouldCount) {
+      // Incrémenter le compteur
+      const { error: updateError } = await supabase
+        .from('lieux')
+        .update({ nb_visites: (data.nb_visites || 0) + 1 })
+        .eq('id', id)
+
+      if (!updateError) {
+        localStorage.setItem(viewKey, now.toString())
+        // Mettre à jour l'affichage local
+        setLieu(prev => prev ? { ...prev, nb_visites: (data.nb_visites || 0) + 1 } : prev)
+      }
+
+      // Log visite en base si connecté
+      if (user) {
+        await supabase.from('visites').insert({ user_id: user.id, lieu_id: id })
+      }
+    }
 
     // Fetch ratings
     const { data: ratings } = await supabase.from('ratings').select('note').eq('lieu_id', id)

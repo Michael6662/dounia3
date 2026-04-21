@@ -231,7 +231,7 @@ body {
   color: var(--cyan); padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;
 }
 .place-card-body { padding: 20px; }
-.place-card-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.place-card-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
 .place-card-location { display: flex; align-items: center; gap: 6px; color: var(--cyan); font-size: 13px; margin-bottom: 10px; }
 .place-card-desc { color: var(--gray); font-size: 14px; line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .place-card-footer { display: flex; align-items: center; justify-content: space-between; }
@@ -328,7 +328,7 @@ body {
 .place-detail-hero iframe { width: 100%; height: 100%; border: none; display: block; }
 .place-detail-overlay { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(transparent, var(--blue-deep)); pointer-events: none; }
 .place-detail-content { padding: 40px 0 80px; }
-.place-detail-title { font-family: var(--font-display); font-size: 42px; font-weight: 800; margin-bottom: 12px; line-height: 1.1; }
+.place-detail-title { font-family: var(--font-display); font-size: 42px; font-weight: 800; margin-bottom: 12px; line-height: 1.15; word-break: break-word; overflow-wrap: break-word; }
 .place-detail-meta { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; }
 .place-meta-item { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--gray); }
 
